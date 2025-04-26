@@ -1,0 +1,368 @@
+---
+title: "EL GWAS :D"
+author: "Santiago Orozco Barrera & Gabriel Ramírez Vilchis"
+format: pdf
+editor: visual
+---
+
+# GWAS
+
+## Desarrollo
+
+```{r}
+# Crear data frames con los datos de los SNPs
+rs4988235_observed_counts <- data.frame(brown_or_other = c(21, 55, 76), 
+                        blue_or_green = c(10, 12, 22), total = c(31, 67, 98), 
+                        row.names = c("A", "G", "total"))
+rs4988235_observed_counts
+rs7495174_observed_counts <- data.frame(brown_or_other = c(55, 21, 76), 
+                        blue_or_green = c(22, 0, 22), total = c(77, 21, 98),
+                        row.names = c("A", "G", "total"))
+rs7495174_observed_counts
+rs713598_observed_counts <- data.frame(brown_or_other = c(32, 44, 76), 
+                        blue_or_green = c(16, 6, 22), total = c(48, 50, 98),
+                        row.names = c("C", "G", "total"))
+rs713598_observed_counts
+rs17822931_observed_counts <- data.frame(brown_or_other = c(41, 35, 76), 
+                        blue_or_green = c(16, 6, 22), total = c(57, 41, 98),
+                        row.names = c("C", "T", "total"))
+rs17822931_observed_counts
+rs4481887_observed_counts <- data.frame(brown_or_other = c(21, 55, 76), 
+                        blue_or_green = c(4, 18, 22), total = c(25, 73, 98),
+                        row.names = c("A", "G", "total"))
+rs4481887_observed_counts
+
+
+
+# Calcular frecuencias observadas
+rs4988235_observed_frequencies <- 
+  rs4988235_observed_counts / rs4988235_observed_counts["total", "total"]
+rs4988235_observed_frequencies
+rs7495174_observed_frequencies <- 
+  rs7495174_observed_counts / rs7495174_observed_counts["total", "total"]
+rs7495174_observed_frequencies
+rs713598_observed_frequencies <- 
+  rs713598_observed_counts / rs713598_observed_counts["total", "total"]
+rs713598_observed_frequencies
+rs17822931_observed_frequencies <- 
+  rs17822931_observed_counts / rs17822931_observed_counts["total", "total"]
+rs17822931_observed_frequencies
+rs4481887_observed_frequencies <- 
+  rs4481887_observed_counts / rs4481887_observed_counts["total", "total"]
+rs4481887_observed_frequencies
+
+
+# rs4988235
+## Calcular frecuencias esperadas
+rs4988235_expected_frequencies <- data.frame(
+  brown_or_other = c(rs4988235_observed_frequencies["total", "brown_or_other"] * 
+                       rs4988235_observed_frequencies["A", "total"], 
+                     rs4988235_observed_frequencies["total", "brown_or_other"] * 
+                       rs4988235_observed_frequencies["G", "total"]), 
+  blue_or_green = c(rs4988235_observed_frequencies["total", "blue_or_green"] * 
+                      rs4988235_observed_frequencies["A", "total"], 
+                    rs4988235_observed_frequencies["total", "blue_or_green"] * 
+                      rs4988235_observed_frequencies["G", "total"]),
+  row.names = c("A", "G"))
+
+## Agregar la fila de totales
+rs4988235_expected_frequencies <- rbind(rs4988235_expected_frequencies, 
+  total = rs4988235_expected_frequencies["A", ] + 
+    rs4988235_expected_frequencies["G", ])
+
+## Agregar la columna de totales
+rs4988235_expected_frequencies <- cbind(rs4988235_expected_frequencies, 
+  total = rs4988235_expected_frequencies[, "brown_or_other"] + 
+    rs4988235_expected_frequencies[, "blue_or_green"])
+
+## Visualizar frecuencias esperadas
+rs4988235_expected_frequencies
+
+
+# rs7495174
+## Calcular frecuencias esperadas
+rs7495174_expected_frequencies <- data.frame(
+  brown_or_other = c(rs7495174_observed_frequencies["total", "brown_or_other"] * 
+                       rs7495174_observed_frequencies["A", "total"], 
+                     rs7495174_observed_frequencies["total", "brown_or_other"] * 
+                       rs7495174_observed_frequencies["G", "total"]), 
+  blue_or_green = c(rs7495174_observed_frequencies["total", "blue_or_green"] * 
+                      rs7495174_observed_frequencies["A", "total"], 
+                    rs7495174_observed_frequencies["total", "blue_or_green"] * 
+                      rs7495174_observed_frequencies["G", "total"]),
+  row.names = c("A", "G"))
+
+## Agregar la fila de totales
+rs7495174_expected_frequencies <- rbind(rs7495174_expected_frequencies, 
+  total = rs7495174_expected_frequencies["A", ] + 
+    rs7495174_expected_frequencies["G", ])
+
+## Agregar la columna de totales
+rs7495174_expected_frequencies <- cbind(rs7495174_expected_frequencies, 
+  total = rs7495174_expected_frequencies[, "brown_or_other"] + 
+    rs7495174_expected_frequencies[, "blue_or_green"])
+
+## Visualizar frecuencias esperadas
+rs7495174_expected_frequencies
+
+
+# rs713598
+## Calcular frecuencias esperadas
+rs713598_expected_frequencies <- data.frame(
+  brown_or_other = c(rs713598_observed_frequencies["total", "brown_or_other"] * 
+                       rs713598_observed_frequencies["C", "total"], 
+                     rs713598_observed_frequencies["total", "brown_or_other"] * 
+                       rs713598_observed_frequencies["G", "total"]), 
+  blue_or_green = c(rs713598_observed_frequencies["total", "blue_or_green"] * 
+                      rs713598_observed_frequencies["C", "total"], 
+                    rs713598_observed_frequencies["total", "blue_or_green"] * 
+                      rs713598_observed_frequencies["G", "total"]),
+  row.names = c("C", "G"))
+
+## Agregar la fila de totales
+rs713598_expected_frequencies <- rbind(rs713598_expected_frequencies, 
+  total = rs713598_expected_frequencies["C", ] + 
+    rs713598_expected_frequencies["G", ])
+
+## Agregar la columna de totales
+rs713598_expected_frequencies <- cbind(rs713598_expected_frequencies, 
+  total = rs713598_expected_frequencies[, "brown_or_other"] + 
+    rs713598_expected_frequencies[, "blue_or_green"])
+
+## Visualizar frecuencias esperadas
+rs713598_expected_frequencies
+
+
+# rs17822931
+## Calcular frecuencias esperadas
+rs17822931_expected_frequencies <- data.frame(
+  brown_or_other = c(rs17822931_observed_frequencies["total", "brown_or_other"] * 
+                       rs17822931_observed_frequencies["C", "total"], 
+                     rs17822931_observed_frequencies["total", "brown_or_other"] * 
+                       rs17822931_observed_frequencies["T", "total"]), 
+  blue_or_green = c(rs17822931_observed_frequencies["total", "blue_or_green"] * 
+                      rs17822931_observed_frequencies["C", "total"], 
+                    rs17822931_observed_frequencies["total", "blue_or_green"] * 
+                      rs17822931_observed_frequencies["T", "total"]),
+  row.names = c("C", "T"))
+
+## Agregar la fila de totales
+rs17822931_expected_frequencies <- rbind(rs17822931_expected_frequencies, 
+  total = rs17822931_expected_frequencies["C", ] + 
+    rs17822931_expected_frequencies["T", ])
+
+## Agregar la columna de totales
+rs17822931_expected_frequencies <- cbind(rs17822931_expected_frequencies, 
+  total = rs17822931_expected_frequencies[, "brown_or_other"] + 
+    rs17822931_expected_frequencies[, "blue_or_green"])
+
+## Visualizar frecuencias esperadas
+rs17822931_expected_frequencies
+
+
+# rs4481887
+## Calcular frecuencias esperadas
+rs4481887_expected_frequencies <- data.frame(
+  brown_or_other = c(rs4481887_observed_frequencies["total", "brown_or_other"] * 
+                       rs4481887_observed_frequencies["A", "total"], 
+                     rs4481887_observed_frequencies["total", "brown_or_other"] * 
+                       rs4481887_observed_frequencies["G", "total"]), 
+  blue_or_green = c(rs4481887_observed_frequencies["total", "blue_or_green"] * 
+                      rs4481887_observed_frequencies["A", "total"], 
+                    rs4481887_observed_frequencies["total", "blue_or_green"] * 
+                      rs4481887_observed_frequencies["G", "total"]),
+  row.names = c("A", "G"))
+
+## Agregar la fila de totales
+rs4481887_expected_frequencies <- rbind(rs4481887_expected_frequencies, 
+  total = rs4481887_expected_frequencies["A", ] + 
+    rs4481887_expected_frequencies["G", ])
+
+## Agregar la columna de totales
+rs4481887_expected_frequencies <- cbind(rs4481887_expected_frequencies, 
+  total = rs4481887_expected_frequencies[, "brown_or_other"] + 
+    rs4481887_expected_frequencies[, "blue_or_green"])
+
+## Visualizar frecuencias esperadas
+rs4481887_expected_frequencies
+
+
+# Calcular conteos esperados
+rs4988235_expected_counts <- rs4988235_expected_frequencies * 
+  rs4988235_observed_counts["total", "total"]
+rs4988235_expected_counts
+
+rs7495174_expected_counts <- rs7495174_expected_frequencies * 
+  rs7495174_observed_counts["total", "total"]
+rs7495174_expected_counts
+
+rs713598_expected_counts <- rs713598_expected_frequencies * 
+  rs713598_observed_counts["total", "total"]
+rs713598_expected_counts
+
+rs17822931_expected_counts <- rs17822931_expected_frequencies * 
+  rs17822931_observed_counts["total", "total"]
+rs17822931_expected_counts
+
+rs4481887_expected_counts <- rs4481887_expected_frequencies * 
+  rs4481887_observed_counts["total", "total"]
+rs4481887_expected_counts
+
+# Retirar totales de los conteos observados
+rs4988235_observed_counts_reduced <- rs4988235_observed_counts[-3, -3]
+rs7495174_observed_counts_reduced <- rs7495174_observed_counts[-3, -3]
+rs713598_observed_counts_reduced <- rs713598_observed_counts[-3, -3]
+rs17822931_observed_counts_reduced <- rs17822931_observed_counts[-3, -3]
+rs4481887_observed_counts_reduced <- rs4481887_observed_counts[-3, -3]
+
+# Aplicar el test de Fisher
+fisher.test(rs4988235_observed_counts_reduced)
+fisher.test(rs7495174_observed_counts_reduced)
+fisher.test(rs713598_observed_counts_reduced)
+fisher.test(rs17822931_observed_counts_reduced)
+fisher.test(rs4481887_observed_counts_reduced)
+
+
+# ODDS RATIOS
+## rs4988235
+### Brown or other
+#### Calcular probabilidades
+brown_A_prob <- rs4988235_observed_counts["A", "brown_or_other"] / 
+  rs4988235_observed_counts["A", "total"]
+brown_G_prob <- rs4988235_observed_counts["G", "brown_or_other"] / 
+  rs4988235_observed_counts["G", "total"]
+#### Calcular odds
+odds_A <- brown_A_prob / (1 - brown_A_prob)
+odds_G <- brown_G_prob / (1 - brown_G_prob)
+#### Calcular odds ratio
+odds_ratio_A_G <- odds_A / odds_G
+odds_ratio_A_G
+
+### Blue or green
+#### Calcular probabilidades
+blue_A_prob <- rs4988235_observed_counts["A", "blue_or_green"] / 
+  rs4988235_observed_counts["A", "total"]
+blue_G_prob <- rs4988235_observed_counts["G", "blue_or_green"] /
+  rs4988235_observed_counts["G", "total"]
+#### Calcular odds
+odds_A <- blue_A_prob / (1 - blue_A_prob)
+odds_G <- blue_G_prob / (1 - blue_G_prob)
+#### Calcular odds ratio
+odds_ratio_A_G <- odds_A / odds_G
+odds_ratio_A_G
+
+
+## rs7495174
+### Brown or other
+#### Calcular probabilidades
+brown_A_prob <- rs7495174_observed_counts["A", "brown_or_other"] / 
+  rs7495174_observed_counts["A", "total"]
+brown_G_prob <- rs7495174_observed_counts["G", "brown_or_other"] /
+  rs7495174_observed_counts["G", "total"]
+#### Calcular odds
+odds_A <- brown_A_prob / (1 - brown_A_prob)
+odds_G <- brown_G_prob / (1 - brown_G_prob)
+#### Calcular odds ratio
+odds_ratio_A_G <- odds_A / odds_G
+odds_ratio_A_G
+
+### Blue or green
+#### Calcular probabilidades
+blue_A_prob <- rs7495174_observed_counts["A", "blue_or_green"] / 
+  rs7495174_observed_counts["A", "total"]
+blue_G_prob <- rs7495174_observed_counts["G", "blue_or_green"] /
+  rs7495174_observed_counts["G", "total"]
+#### Calcular odds
+odds_A <- blue_A_prob / (1 - blue_A_prob)
+odds_G <- blue_G_prob / (1 - blue_G_prob)
+#### Calcular odds ratio
+odds_ratio_A_G <- odds_A / odds_G
+odds_ratio_A_G
+
+
+## rs713598
+### Brown or other
+#### Calcular probabilidades
+brown_C_prob <- rs713598_observed_counts["C", "brown_or_other"] / 
+  rs713598_observed_counts["C", "total"]
+brown_G_prob <- rs713598_observed_counts["G", "brown_or_other"] /
+  rs713598_observed_counts["G", "total"]
+#### Calcular odds
+odds_C <- brown_C_prob / (1 - brown_C_prob)
+odds_G <- brown_G_prob / (1 - brown_G_prob)
+#### Calcular odds ratio
+odds_ratio_C_G <- odds_C / odds_G
+odds_ratio_C_G
+
+### Blue or green
+#### Calcular probabilidades
+blue_C_prob <- rs713598_observed_counts["C", "blue_or_green"] / 
+  rs713598_observed_counts["C", "total"]
+blue_G_prob <- rs713598_observed_counts["G", "blue_or_green"] /
+  rs713598_observed_counts["G", "total"]
+#### Calcular odds
+odds_C <- blue_C_prob / (1 - blue_C_prob)
+odds_G <- blue_G_prob / (1 - blue_G_prob)
+#### Calcular odds ratio
+odds_ratio_C_G <- odds_C / odds_G
+odds_ratio_C_G
+
+
+## rs17822931
+### Brown or other
+#### Calcular probabilidades
+brown_C_prob <- rs17822931_observed_counts["C", "brown_or_other"] / 
+  rs17822931_observed_counts["C", "total"]
+brown_T_prob <- rs17822931_observed_counts["T", "brown_or_other"] /
+  rs17822931_observed_counts["T", "total"]
+#### Calcular odds
+odds_C <- brown_C_prob / (1 - brown_C_prob)
+odds_T <- brown_T_prob / (1 - brown_T_prob)
+#### Calcular odds ratio
+odds_ratio_C_T <- odds_C / odds_T
+odds_ratio_C_T
+
+### Blue or green
+#### Calcular probabilidades
+blue_C_prob <- rs17822931_observed_counts["C", "blue_or_green"] / 
+  rs17822931_observed_counts["C", "total"]
+blue_T_prob <- rs17822931_observed_counts["T", "blue_or_green"] /
+  rs17822931_observed_counts["T", "total"]
+#### Calcular odds
+odds_C <- blue_C_prob / (1 - blue_C_prob)
+odds_T <- blue_T_prob / (1 - blue_T_prob)
+#### Calcular odds ratio
+odds_ratio_C_T <- odds_C / odds_T
+odds_ratio_C_T
+
+
+## rs4481887
+### Brown or other
+#### Calcular probabilidades
+brown_A_prob <- rs4481887_observed_counts["A", "brown_or_other"] / 
+  rs4481887_observed_counts["A", "total"]
+brown_G_prob <- rs4481887_observed_counts["G", "brown_or_other"] /
+  rs4481887_observed_counts["G", "total"]
+#### Calcular odds
+odds_A <- brown_A_prob / (1 - brown_A_prob)
+odds_G <- brown_G_prob / (1 - brown_G_prob)
+#### Calcular odds ratio
+odds_ratio_A_G <- odds_A / odds_G
+odds_ratio_A_G
+
+### Blue or green
+#### Calcular probabilidades
+blue_A_prob <- rs4481887_observed_counts["A", "blue_or_green"] / 
+  rs4481887_observed_counts["A", "total"]
+blue_G_prob <- rs4481887_observed_counts["G", "blue_or_green"] /
+  rs4481887_observed_counts["G", "total"]
+#### Calcular odds
+odds_A <- blue_A_prob / (1 - blue_A_prob)
+odds_G <- blue_G_prob / (1 - blue_G_prob)
+#### Calcular odds ratio
+odds_ratio_A_G <- odds_A / odds_G
+odds_ratio_A_G
+
+
+
+```

@@ -1,5 +1,5 @@
 ---
-title: "Reporte_GWAS"
+title: "GWAS sobre el color de ojos"
 author: "Gabriel Ramírez-Vilchis y Santiago Orozco-Barrera"
 date: "`r Sys.Date()`"
 output:
@@ -11,7 +11,7 @@ output:
 
 # Introducción
 
-  El color de ojo (o mejor dicho el color del iris) es un rasgo ampliamente discutido en contextos científicos, pero también en la cotidaneadad. Muchas veces pensado que es un rasgo simple, en realidad es un fenotipo construido por múltiples factores, tanto genéticos (por lo que decimos que es una enfermedad poligénica) como ambientales. 
+  El color de ojo (o mejor dicho, el color del iris) es un rasgo ampliamente discutido en contextos científicos, pero también en la cotidianidad. Aunque pueda parecer un rasgo simple, en realidad es un fenotipo construido por múltiples factores, tanto genéticos (por lo que se considera una enfermedad poligénica) como ambientales. 
   
   La clasificación del color de ojos ha sido clasificada desde el siglo XIX, desde cuando ha aumentado y disminuido la cantidad de categorías para clasificarlos [1]. Sin embargo, así como pasa con el color en general, la clasificación del color de ojos es subjetivo. Es una clasificación cultural y del lenguaje. 
 

@@ -92,7 +92,7 @@ rs4988235_observed_counts_reduced <- rs4988235_observed_counts[-3,-3]
 fisher.test(rs4988235_observed_counts_reduced)
 ```
 
-Para el SNP rs4988235, la prueba de Fisher reportó un OR (odds ratio) de 0.4621524 con un p-value de 0.126, lo cual es consistente con lo obtenido en los resultados anteriores. El OR nos habla de una asociación negativa entre el SNP y el fenotipo de color de ojo, lo que significa que los individuos con el genotipo AA tienen menos probabilidades de tener ojos café u otro en comparación con los individuos con el genotipo GG. Sin embargo, dado que el p-value es mayor a 0.05, no se puede concluir que esta asociación no sea producida por el azar. 
+Para el SNP rs4988235, la prueba de Fisher reportó un OR (odds ratio) de 0.4621524 con un p-value de 0.126, lo cual es consistente con lo obtenido en los resultados anteriores. El OR nos habla de una asociación negativa entre el SNP y el fenotipo de color de ojo, lo que significa que los individuos con el genotipo AA tienen menos probabilidades de tener ojos café u otro en comparación con los individuos con el genotipo GG. Sin embargo, dado que el p-value es mayor al umbral, no se puede concluir que esta asociación no sea producida por el azar. 
 
 Por lo que, concluimos que no hay una relación significativa entre el SNP rs4988235 y el fenotipo de color de ojo.
 
@@ -174,7 +174,9 @@ rs7495174_observed_counts_reduced <- rs7495174_observed_counts[-3,-3]
 fisher.test(rs7495174_observed_counts_reduced)
 ```
 
-La prueba de Fisher arrojó los mismos resultados que el cálculo de OR a través de fórmula. Se obtuvo que un OR de 0 y un p-value de 0.002897. Lo anterior indica que existe una asociación significativa entre el SNP rs7495174 y el fenotipo de color de ojo. En este caso, el OR indica que los individuos con el genotipo CC tienen infinitas veces mayor probabilidad de tener ojos azules o verdes en comparación con los individuos GG, lo cual se ve muy claro al no haber ningún caso de individuo con alelos G que presenten ojos azules.
+La prueba de Fisher arrojó los mismos resultados que el cálculo de OR a través de fórmula. Se obtuvo que un OR de 0 y un p-value de 0.002897. Lo anterior indica que existe una asociación significativa entre el SNP rs7495174 y el fenotipo de color de ojo. Ya que como los 5 SNPs con los que estamos trabajando no son decisiones azarosas, necesitaríamos un p-value de $10^-{7}$ para concluir que la asociación es significativa, considerando un FDR de 0.05 y 500000 SNPs. Por lo que 0.002897 no se consideraría como significativo.
+
+En este caso, el OR indica que los individuos con el genotipo CC tienen infinitas veces mayor probabilidad de tener ojos azules o verdes en comparación con los individuos GG, lo cual se ve muy claro al no haber ningún caso de individuo con alelos G que presenten ojos azules.
 
 ### Likelihood Ratio
 
@@ -266,7 +268,7 @@ fisher.test(rs713598_observed_counts_reduced)
 
 ```
 
-Como ya se observó anteriormente, la prueba de Fisher es congruente con nuestros resultados anteriores para el SNP de rs713598. Se obtuvo un OR de 0.2763657 y un p-value de 0.01522, lo que indica que existe una asociación significativa entre el SNP rs713598 y el fenotipo de color de ojo. 
+Como ya se observó anteriormente, la prueba de Fisher es congruente con nuestros resultados anteriores para el SNP de rs713598. Se obtuvo un OR de 0.2763657 y un p-value de 0.01522, aunque el p-value es bajo, no es lo suficientemente bajo como para concluir que la asociación no es producida por el azar.
 
 El OR indica que hay una relación inversa entre los individuos con alelo C y el fenotipo de ojos cafés u otros. Esto quiere decir que hay una asociación del alelo C con el fenotipo de ojos azules o verdes, mientras que hay una asociación entre el alelo G con el fenotipo de ojos cafés u otros. 
 
@@ -461,14 +463,11 @@ Esto nos habla de una relación positiva entre el alelo C y el fenotipo de ojos 
 
 # Conclusiones
 
+Se implementó un GWAS para determinar la relación entre 5 SNPs y el color de ojo. Dado que el umbral del p-value se calculó considerando un FDR de 0.05 y que los 5 SNPs vienen de un pool de 500,000, dándonos un resultado de $10^-{7}$, ningún SNP se encontró como significativo. Sin embargo, un SNP,  rs7495174, obtuvo el p-value entre los condidatos, por ello lo consideramos como la asociación con el fenotipo más significativa.  
 
-Se implementó un GWAS para determinar la relación entre 5 SNPs y el color de ojo. Solo 2 (rs7495174 y rs713598) presentaron una asociación significativa con el fenotipo.  
-
-Los datos obtenidos solo reflejan si hay asociación entre los SNPs y el fenotipo de color de ojo para este tamaño de muestra, no hay información suficiente para concluir que la asociación no sea significativa para los demás SNPs. 
+Los datos obtenidos solo reflejan si hay asociación entre los SNPs y el fenotipo de color de ojo para este tamaño de muestra, no hay información suficiente para concluir que la asociación no sea significativa para los SNPs. Por lo que con más dotos, la conclusión podría ser diferente.
 
 Para rs7495174 se encontró un OR de 0 y un LR de 0.7236842 para el alelo A, indicando que el alelo A tiene una probabilidad menor de presentarse en individuos con ojos cafés u otros. En otras palabras, el alelo A de este SNP está asociado al fenotipo de ojos azules o verdes; mientras que el alelo G se puede asociar al fenotipo de ojos cafés u otros.  
-
-Mientras tanto, para el SNP rs713598 se encontró un OR de 0.2727273 y un LR de 0.5789474, lo que indica que el alelo C tiene una probabilidad menor de presentarse en individuos con ojos cafés u otros, permitiendo asociar el alelo C del SNP rs713598 con el fenotipo de ojos azules o verdes; y al alelo G con el fenotipo de ojos cafés u otros.  
 
 
 # Bibliografía

@@ -13,9 +13,9 @@ output:
 
   El color de ojo (o mejor dicho, el color del iris) es un rasgo ampliamente discutido en contextos científicos, pero también en la cotidianidad. Aunque pueda parecer un rasgo simple, en realidad es un fenotipo construido por múltiples factores, tanto genéticos (por lo que se considera una enfermedad poligénica) como ambientales. 
   
-  La clasificación del color de ojos ha sido clasificada desde el siglo XIX, desde cuando ha aumentado y disminuido la cantidad de categorías para clasificarlos [1]. Sin embargo, así como pasa con el color en general, la clasificación del color de ojos es subjetivo. Es una clasificación cultural y del lenguaje. 
+  La clasificación del color de ojos ha sido estudiada desde el siglo XIX, y desde entonces ha variado la cantidad de categorías propuestas [1]. Sin embargo, la clasificación del color de ojos es subjetiva, dado que se trata de una clasificación cultural y del lenguaje empleado.  
 
-Por otro lado, estudios pasados de asociación del genoma completo (GWAS) han identíficado múltiples marcadores genéticos asociados al color de ojos. Unestudio del 2021, identificó 50 loci genéticos adicionales a los 11 ya conocidos asociados al color de ojos en una población de alrededor de 195,000 individuos; implicados en la producción de melanina y en la morfología y estructura del iris [2]. Esto reafirmando la naturaleza multifactorial del color de ojos. Sin embargo, en este mismo estudio se reporta que sólo el 53.2% de la variación es explicada por estos SNPs, indicando otros regiones genómicas, pero también factores ambientales que influencían el color de ojos.
+Por otro lado, estudios pasados de asociación del genoma completo (GWAS) han identificado múltiples marcadores genéticos asociados al color de ojos. Un estudio del 2021, identificó 50 _loci_ genéticos adicionales a los 11 ya conocidos, asociados al color de ojos en una población de alrededor de 195 000 individuos; implicados en la producción de melanina y en la morfología y estructura del iris [2]. Esto reafirma la naturaleza multifactorial del color de ojos. Sin embargo, en este mismo estudio se reporta que sólo el 53.2% de la variación es explicada por estos SNPs, sugiriendo que hay otras regiones genómicas y factores ambientales que influencian el color de ojos.
 
 En este trabajo, se cuestionará la asociación de 5 SNP con el color de iris a través de diferentes métodos estadísticos. 
 
@@ -25,14 +25,14 @@ Para los cálculos estadísticos, se utilizó R. El código fuente puede ser enc
 
 ## rs4988235
 
-La frecuencia de los genotipos (AA, AG, GG) para los fenotipos de color de ojo (Café/otros; o Azul/verde) del SNP rs4988235 son las siguiente:
+Las frecuencias de los genotipos (AA, AG, GG) para los fenotipos de color de ojo (Café/otros; o Azul/verde) del SNP rs4988235 son las siguientes:
 
 | rs4988235  | AA | AG | GG |
 |------------|----|----|----|
 | Café/Otro  | 6  | 9  | 23 |
 | Azul/Verde | 3  | 4  | 4  |
 
-A partir de esta tabla, se puede generar la siguiente tabla de contingencia:
+A partir de estos datos, se puede generar la siguiente tabla de contingencia:  
 
 ```{r}
  # Crear data frames con los datos de los SNPs
@@ -46,7 +46,7 @@ A partir de esta tabla, se puede generar la siguiente tabla de contingencia:
 
 ### Odds Ratio
 
-A través de la tabla de contingencia, se calcula el Odds Ratio (OR) para determinar la asociación entre el SNP rs4988235 y el fenotipo de color de ojo. Se obtuvo el siguiente resultado:
+A través de la tabla de contingencia, se calcula el _Odds Ratio_ (OR) para determinar la asociación entre el SNP rs4988235 y el fenotipo de color de ojo. Se obtuvo el siguiente resultado:
 
 El cálculo con respecto al fenotipo de ojos cafés u otros:
 
@@ -108,7 +108,7 @@ LR_rs4988235
 ```
 
 
-Se obtuvo el Likelihhod Ratio tomando como referencia el alelo A y el fenotipo de ojos cafés u otros. Se obtuvo un LR de 0.6078947, esto es congruente con el OR obtenido anteriormente. Esto indica que el alelo A tiene una probabilidad menor de presentarse en individuos con ojos cafés u otros en comparación con individuos con ojos azules o verdes, aproximadamente 39% (1 - LR = 0.3921053) menos.
+Se obtuvo el Likelihood Ratio tomando como referencia el alelo A y el fenotipo de ojos cafés u otros. Se obtuvo un LR de 0.6078947, esto es congruente con el OR obtenido anteriormente. Esto indica que el alelo A tiene una probabilidad menor de presentarse en individuos con ojos cafés u otros en comparación con individuos con ojos azules o verdes, aproximadamente 39% (1 - LR = 0.3921053) menos.
 
 
 
@@ -137,32 +137,32 @@ Para obtener una medida de asociación entre el SNP rs7495174 y el fenotipo de c
 Con respecto al fenotipo de ojos cafés u otros:
 
 ```{r}  
-###Brownorother
-####Calcularprobabilidades
-brown_A_prob<-rs7495174_observed_counts["A","brown_or_other"] /
+### Brown or other
+####Calcular probabilidades
+brown_A_prob <- rs7495174_observed_counts["A","brown_or_other"] /
 rs7495174_observed_counts["A","total"]
-brown_G_prob<-rs7495174_observed_counts["G","brown_or_other"] /
+brown_G_prob <- rs7495174_observed_counts["G","brown_or_other"] /
 rs7495174_observed_counts["G","total"]
-####Calcularodds
-odds_A<-brown_A_prob /(1-brown_A_prob)
-odds_G<-brown_G_prob /(1-brown_G_prob)
-####Calcularoddsratio
-odds_ratio_A_G<-odds_A/ odds_G
+#### Calcular odds
+odds_A <- brown_A_prob / (1-brown_A_prob)
+odds_G <- brown_G_prob / (1-brown_G_prob)
+#### Calcular odds ratio
+odds_ratio_A_G <- odds_A / odds_G
 odds_ratio_A_G
 ```
 
 ```{r} 
 ### Blue or green
 #### Calcular probabilidades
-blue_A_prob<-rs7495174_observed_counts["A","blue_or_green"] /
-rs7495174_observed_counts["A","total"]
-blue_G_prob <-rs7495174_observed_counts["G","blue_or_green"] /
-rs7495174_observed_counts["G","total"]
+blue_A_prob <- rs7495174_observed_counts["A","blue_or_green"] /
+    rs7495174_observed_counts["A","total"]
+blue_G_prob <- rs7495174_observed_counts["G","blue_or_green"] /
+    rs7495174_observed_counts["G","total"]
 #### Calcular odds
-odds_A<-blue_A_prob/ (1-blue_A_prob)
-odds_G<-blue_G_prob/ (1-blue_G_prob)
+odds_A <- blue_A_prob / (1-blue_A_prob)
+odds_G <- blue_G_prob / (1-blue_G_prob)
 #### Calcular odds ratio
-odds_ratio_A_G<-odds_A/ odds_G
+odds_ratio_A_G <- odds_A / odds_G
 odds_ratio_A_G
 ```
 
@@ -171,7 +171,7 @@ odds_ratio_A_G
 ```{r}
 rs7495174_observed_counts_reduced <- rs7495174_observed_counts[-3,-3]
 # Aplicar el test de Fisher
- fisher.test(rs7495174_observed_counts_reduced)
+fisher.test(rs7495174_observed_counts_reduced)
 ```
 
 La prueba de Fisher arrojó los mismos resultados que el cálculo de OR a través de fórmula. Se obtuvo que un OR de 0 y un p-value de 0.002897. Lo anterior indica que existe una asociación significativa entre el SNP rs7495174 y el fenotipo de color de ojo. En este caso, el OR indica que los individuos con el genotipo CC tienen infinitas veces mayor probabilidad de tener ojos azules o verdes en comparación con los individuos GG, lo cual se ve muy claro al no haber ningún caso de individuo con alelos G que presenten ojos azules.
@@ -211,9 +211,9 @@ La tabla de contingencia para el SNP rs713598 se construye de la siguiente maner
 
 ```{r}
 rs713598_observed_counts <- data.frame(brown_or_other = c(32, 44, 76),
-blue_or_green = c(16, 6, 22), total = c(48, 50, 98),
-row.names = c("C", "G", "total"))
-rs713598_observed_counts
+    blue_or_green = c(16, 6, 22), total = c(48, 50, 98),
+    row.names = c("C", "G", "total"))
+    rs713598_observed_counts
 ```
 
 ### Odds Ratio
@@ -223,17 +223,17 @@ Para el SNP rs713598, el Odds Ratio (OR) se calcula de la siguiente manera:
 Con respecto al fenotipo de ojos cafés u otros:
 
 ```{r}
-###Brownorother
-####Calcularprobabilidades
-brown_C_prob<-rs713598_observed_counts["C","brown_or_other"] /
-rs713598_observed_counts["C","total"]
-brown_G_prob<-rs713598_observed_counts["G","brown_or_other"] /
-rs713598_observed_counts["G","total"]
-####Calcularodds
-odds_C<-brown_C_prob /(1-brown_C_prob)
-odds_G<-brown_G_prob /(1-brown_G_prob)
-####Calcularoddsratio
-odds_ratio_C_G<-odds_C/ odds_G
+### Brown or other
+####Calcular probabilidades
+brown_C_prob <- rs713598_observed_counts["C","brown_or_other"] /
+    rs713598_observed_counts["C","total"]
+brown_G_prob <- rs713598_observed_counts["G","brown_or_other"] /
+    rs713598_observed_counts["G","total"]
+####Calcular odds
+odds_C <- brown_C_prob / (1-brown_C_prob)
+odds_G <- brown_G_prob / (1-brown_G_prob)
+#### Calcular odds ratio
+odds_ratio_C_G <- odds_C / odds_G
 odds_ratio_C_G
 ```
 $$ OR_{café} = 0.2727273$$
@@ -241,17 +241,17 @@ Mientras que para el fenotipo de ojos azules o verdes:
 
 ```{r}
 
-###Blueorgreen
+###Blue or green
 #### Calcular probabilidades
-blue_C_prob<-rs713598_observed_counts["C","blue_or_green"] /
-rs713598_observed_counts["C","total"]
-blue_G_prob <-rs713598_observed_counts["G","blue_or_green"] /
-rs713598_observed_counts["G","total"]
+blue_C_prob <- rs713598_observed_counts["C","blue_or_green"] /
+    rs713598_observed_counts["C","total"]
+blue_G_prob <- rs713598_observed_counts["G","blue_or_green"] /
+    rs713598_observed_counts["G","total"]
 #### Calcular odds
-odds_C<-blue_C_prob/ (1-blue_C_prob)
-odds_G<-blue_G_prob/ (1-blue_G_prob)
+odds_C <- blue_C_prob / (1-blue_C_prob)
+odds_G <- blue_G_prob / (1-blue_G_prob)
 #### Calcular odds ratio
-odds_ratio_C_G<-odds_C/ odds_G
+odds_ratio_C_G <- odds_C / odds_G
 odds_ratio_C_G
 ```
 
@@ -266,7 +266,7 @@ fisher.test(rs713598_observed_counts_reduced)
 
 ```
 
-Como ya viene siendo costumbre, la prueba de Fisher es congruente con nuestros resultados anteriores para el SNP de rs713598. Se obtuvo un OR de 0.2763657 y un p-value de 0.01522, lo que indica que existe una asociación significativa entre el SNP rs713598 y el fenotipo de color de ojo. 
+Como ya se observó anteriormente, la prueba de Fisher es congruente con nuestros resultados anteriores para el SNP de rs713598. Se obtuvo un OR de 0.2763657 y un p-value de 0.01522, lo que indica que existe una asociación significativa entre el SNP rs713598 y el fenotipo de color de ojo. 
 
 El OR indica que hay una relación inversa entre los individuos con alelo C y el fenotipo de ojos cafés u otros. Esto quiere decir que hay una asociación del alelo C con el fenotipo de ojos azules o verdes, mientras que hay una asociación entre el alelo G con el fenotipo de ojos cafés u otros. 
 
@@ -288,7 +288,7 @@ Se calculó el Likelihood Ratio considerando el alelo C en relación con el feno
 
 ## rs17822931
 
-A continuación se presentan los resultados para el SNP rs17822931:
+A continuación se presentan los resultados para el SNP rs17822931:  
 | rs17822931 | CC | CT | TT |
 |------------|----|----|----|
 | Café/Otro  | 15 | 11 | 12 |
@@ -303,20 +303,21 @@ rs17822931_observed_counts
 
 ### Odds Ratio
 
-Para el SNP rs17822931, el Odds Ratio (OR) se calcula de la siguiente manera:
+Para el SNP rs17822931, el Odds Ratio (OR) se calcula de la siguiente forma:  
+
 Con respecto al fenotipo de ojos cafés u otros:
 
 ```{r}
 #### Calcular probabilidades
-brown_C_prob<-rs17822931_observed_counts["C","brown_or_other"]/
-rs17822931_observed_counts["C","total"]
-brown_T_prob<-rs17822931_observed_counts["T","brown_or_other"]/
-rs17822931_observed_counts["T","total"]
+brown_C_prob <- rs17822931_observed_counts["C","brown_or_other"]/
+    rs17822931_observed_counts["C","total"]
+brown_T_prob <- rs17822931_observed_counts["T","brown_or_other"]/
+    rs17822931_observed_counts["T","total"]
 #### Calcular odds
-odds_C<-brown_C_prob /(1-brown_C_prob)
-odds_T<-brown_T_prob /(1-brown_T_prob)
+odds_C<-brown_C_prob / (1-brown_C_prob)
+odds_T<-brown_T_prob / (1-brown_T_prob)
 #### Calcular odds ratio
-odds_ratio_C_T<-odds_C/ odds_T
+odds_ratio_C_T <- odds_C / odds_T
 odds_ratio_C_T
 ```
 
@@ -325,16 +326,16 @@ Para el fenotipo de ojos azules o verdes:
 
 ```{r}
 ### Blue or green
-####Calcular probabilidades
-blue_C_prob<-rs17822931_observed_counts["C","blue_or_green"] /
-rs17822931_observed_counts["C","total"]
-blue_T_prob <-rs17822931_observed_counts["T","blue_or_green"] /
-rs17822931_observed_counts["T","total"]
+#### Calcular probabilidades
+blue_C_prob <- rs17822931_observed_counts["C","blue_or_green"] /
+    rs17822931_observed_counts["C","total"]
+blue_T_prob <- rs17822931_observed_counts["T","blue_or_green"] /
+    rs17822931_observed_counts["T","total"]
 #### Calcular odds
-odds_C<-blue_C_prob/ (1-blue_C_prob)
-odds_T<-blue_T_prob/ (1-blue_T_prob)
+odds_C <- blue_C_prob / (1-blue_C_prob)
+odds_T <- blue_T_prob / (1-blue_T_prob)
 #### Calcular odds ratio
-odds_ratio_C_T<-odds_C/ odds_T
+odds_ratio_C_T <- odds_C / odds_T
 odds_ratio_C_T
 ```
 
@@ -375,24 +376,24 @@ A continuación se presentan los resultados para el SNP rs4481887:
 La tabla de contingencia para el SNP rs4481887 se construye de la siguiente manera:
 
 ```{r}
-rs4481887_observed_counts<-data.frame(brown_or_other= c(21,55,76),
-blue_or_green= c(4,18,22),total= c(25,73,98),
-row.names=c("A","G","total"))
+rs4481887_observed_counts <- data.frame(brown_or_other = c(21,55,76),
+    blue_or_green = c(4,18,22),total = c(25,73,98),
+    row.names = c("A","G","total"))
 rs4481887_observed_counts
 ```
 
 ### Odds Ratio
 
-Para el SNP rs4481887, el Odds Ratio (OR) se calcula de la siguiente manera:
+Para el SNP rs4481887, el Odds Ratio (OR) se calcula de la siguiente manera:  
 Con respecto al fenotipo de ojos cafés u otros:
 
 ```{r}
 ### Brown or other
 #### Calcular probabilidades
-brown_A_prob<-rs4481887_observed_counts["A","brown_or_other"] /
-rs4481887_observed_counts["A", "total"]
+brown_A_prob <- rs4481887_observed_counts["A","brown_or_other"] /
+    rs4481887_observed_counts["A", "total"]
 brown_G_prob <- rs4481887_observed_counts["G", "brown_or_other"] /
-rs4481887_observed_counts["G", "total"]
+    rs4481887_observed_counts["G", "total"]
 #### Calcular odds
 odds_A <- brown_A_prob / (1- brown_A_prob)
 odds_G <- brown_G_prob / (1- brown_G_prob)
@@ -410,9 +411,9 @@ Mientras que para el fenotipo de ojos azules o verdes:
 ### Blue or green
 #### Calcular probabilidades
 blue_A_prob <- rs4481887_observed_counts["A", "blue_or_green"] /
-rs4481887_observed_counts["A", "total"]
+   rs4481887_observed_counts["A", "total"]
 blue_G_prob <- rs4481887_observed_counts["G", "blue_or_green"] /
-rs4481887_observed_counts["G", "total"]
+   rs4481887_observed_counts["G", "total"]
 #### Calcular odds
 odds_A <- blue_A_prob / (1- blue_A_prob)
 odds_G <- blue_G_prob / (1- blue_G_prob)
@@ -461,13 +462,14 @@ Esto nos habla de una relación positiva entre el alelo C y el fenotipo de ojos 
 # Conclusiones
 
 
-A través de métodos estadísticos se implementó un estudio de asociación del genoma completo (GWAS) para determinar la relación entre 5 SNPs y el fenotipo de color de ojo. De los 5 SNPs analizados, solo 2 (rs7495174 y rs713598) presentaron una asociación significativa con el fenotipo de color de ojo. 
+Se implementó un GWAS para determinar la relación entre 5 SNPs y el color de ojo. Solo 2 (rs7495174 y rs713598) presentaron una asociación significativa con el fenotipo.  
 
-Sin embargo, también hay que considerar que los datos obtenidos solo reflejan la asociación o no entre los SNPs y el fenotipo de color de ojo en este tamaño de muestra. Por misma interpretación de p-valor, no hay información suficiente para concluir que la asociación no es significativa para los SNPs rs4988235, rs17822931 y rs4481887; y hay que considerar que con más datos la asociación podría cambiar.
+Los datos obtenidos solo reflejan si hay asociación entre los SNPs y el fenotipo de color de ojo para este tamaño de muestra, no hay información suficiente para concluir que la asociación no sea significativa para los demás SNPs. 
 
-Considerando solo los SNPs que se encontraron significativos se obtuvo lo siguiente. Para rs7495174 se encontró un OR de 0 y un LR de 0.7236842 para el alelo A, lo que indica que el alelo A tiene una probabilidad mucho menor de presentarse en individuos con ojos cafés u otros en comparación con individuos con ojos azules o verdes. En otras palabras podemos decir que el alelo A de este SNP está asociado al fenotipo de ojos azules o verdes; mientras que al alelo G lo podemos asociar al fenotipo de ojos cafés u otros.
+Para rs7495174 se encontró un OR de 0 y un LR de 0.7236842 para el alelo A, indicando que el alelo A tiene una probabilidad menor de presentarse en individuos con ojos cafés u otros. En otras palabras, el alelo A de este SNP está asociado al fenotipo de ojos azules o verdes; mientras que el alelo G se puede asociar al fenotipo de ojos cafés u otros.  
 
-Mientras que para el SNP rs713598 se encontró un OR de 0.2727273 y un LR de 0.5789474, lo que indica que el alelo C tiene una probabilidad menor de presentarse en individuos con ojos cafés u otros en comparación con individuos con ojos azules o verdes. O sea que podemos asociar el alelo C del SNP rs713598 con el fenotipo de ojos azules o verdes; y al alelo G con el fenotipo de ojos cafés u otros.
+Mientras tanto, para el SNP rs713598 se encontró un OR de 0.2727273 y un LR de 0.5789474, lo que indica que el alelo C tiene una probabilidad menor de presentarse en individuos con ojos cafés u otros, permitiendo asociar el alelo C del SNP rs713598 con el fenotipo de ojos azules o verdes; y al alelo G con el fenotipo de ojos cafés u otros.  
+
 
 # Bibliografía
 

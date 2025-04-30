@@ -463,7 +463,7 @@ Esto nos habla de una relación positiva entre el alelo C y el fenotipo de ojos 
 
 # Conclusiones
 
-Se implementó un GWAS para determinar la relación entre 5 SNPs y el color de ojo. Dado que el umbral del p-value se calculó considerando un FDR de 0.05 y que los 5 SNPs vienen de un pool de 500,000, dándonos un resultado de $10^-{7}$, ningún SNP se encontró como significativo. Sin embargo, un SNP,  rs7495174, obtuvo el p-value entre los condidatos, por ello lo consideramos como la asociación con el fenotipo más significativa.  
+Se implementó un GWAS para determinar la relación entre 5 SNPs y el color de ojo. Dado que el umbral del p-value se calculó considerando un FDR de 0.05 y que los 5 SNPs vienen de un pool de 500,000, dándonos un resultado de $10^-{7}$, ningún SNP se encontró como significativo. Sin embargo, un SNP,  rs7495174, obtuvo el p-value más bajo entre los condidatos, por ello lo consideramos como la asociación con el fenotipo más significativa.  
 
 Los datos obtenidos solo reflejan si hay asociación entre los SNPs y el fenotipo de color de ojo para este tamaño de muestra, no hay información suficiente para concluir que la asociación no sea significativa para los SNPs. Por lo que con más dotos, la conclusión podría ser diferente.
 
